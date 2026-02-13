@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Para Adriana 💕</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; width: 100%; overflow: hidden; touch-action: pan-y; }
+
+  body {
+    background: #fff5f0;
+    color: #3d2020;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  canvas#c {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    touch-action: none;
+  }
+
+  .ov {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+    pointer-events: none;
+  }
+
+  .intro {
+    text-align: center;
+    pointer-events: auto;
+    animation: si 1.5s cubic-bezier(.16,1,.3,1) both;
+    padding: 2rem;
+  }
+  .intro.h { display: none; }
+
+  @keyframes si {
+    from { opacity: 0; transform: translateY(25px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .intro .f {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #4a2525;
+    margin-bottom: .3rem;
+  }
+
+  .intro .n {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #e0566a;
+    font-style: italic;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .intro .l {
+    font-size: .75rem;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: #c9736e;
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+
+  .intro button {
+    background: linear-gradient(135deg, #ff8a80, #f48fb1);
+    border: none;
+    color: #fff;
+    padding: 1.1rem 3.2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    cursor: pointer;
+    border-radius: 60px;
+    transition: all .5s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 8px 32px rgba(244,143,177,.35);
+    -webkit-appearance: none;
+  }
+  .intro button:active { transform: scale(.96); }
+
+  .mc {
+    text-align: center;
+    pointer-events: auto;
+    max-width: 480px;
+    width: 100%;
+    padding: 2.2rem 1.8rem;
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 24px;
+    border: 1px solid rgba(244,143,177,.18);
+    box-shadow: 0 16px 50px rgba(200,100,100,.08);
+    display: none;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  .mc.a { display: block; animation: cr 1s cubic-bezier(.16,1,.3,1) both; }
+  .mc.h { display: none; }
+
+  @keyframes cr {
+    from { opacity: 0; transform: scale(.92) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .mc .ct { font-size: .7rem; letter-spacing: .5em; text-transform: uppercase; color: #d4877f; margin-bottom: .3rem; font-weight: 400; }
+  .mc .cn { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; color: #e0566a; font-style: italic; margin-bottom: 1.5rem; }
+
+  .mc h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: .6rem;
+    color: #4a2525;
+  }
+  .mc h1 em { font-style: italic; color: #e0566a; font-weight: 600; }
+
+  .dv { width: 45px; height: 2px; background: linear-gradient(90deg, transparent, #f48fb1, transparent); margin: 1.2rem auto; border-radius: 2px; }
+
+  .mc .pm {
+    font-size: .95rem;
+    color: #6a4040;
+    line-height: 1.85;
+    margin-bottom: 2.2rem;
+    font-weight: 300;
+    padding: 0 .3rem;
+  }
+  .mc .pm strong { color: #d45060; font-weight: 500; }
+
+  .ba {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    min-height: 70px;
+    position: relative;
+    padding: .5rem 0;
+  }
+
+  .by {
+    padding: .95rem 2.5rem;
+    background: linear-gradient(135deg, #ff8a80, #f06292);
+    border: none;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: .08em;
+    cursor: pointer;
+    border-radius: 60px;
+    transition: all .35s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 6px 25px rgba(240,98,146,.3);
+    z-index: 2;
+    position: relative;
+    -webkit-appearance: none;
+  }
+  .by:active { transform: scale(.97); }
+
+  .bn {
+    padding: .85rem 2rem;
+    background: #fff;
+    border: 1.5px solid #f0c0c0;
+    color: #c48080;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .95rem;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 60px;
+    transition: transform .12s ease, opacity .3s, font-size .25s, padding .25s;
+    user-select: none;
+    -webkit-appearance: none;
+    position: relative;
+  }
+
+  .fm {
+    position: fixed;
+    color: #e0566a;
+    font-size: .88rem;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    animation: fmm 2s ease-out forwards;
+    z-index: 50;
+    font-family: 'DM Sans', sans-serif;
+  }
+  @keyframes fmm {
+    0% { opacity: 1; transform: translate(-50%,0) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-65px) scale(.85); }
+  }
+
+  .ss {
+    text-align: center;
+    pointer-events: auto;
+    display: none;
+    max-width: 480px;
+    width: 100%;
+    padding: 2.5rem 1.8rem;
+    background: rgba(255,255,255,.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 24px;
+    box-shadow: 0 16px 50px rgba(200,100,100,.1);
+  }
+  .ss.a { display: block; animation: cr 1s cubic-bezier(.16,1,.3,1) both; }
+
+  .ss .se { font-size: 4rem; display: inline-block; margin-bottom: 1.2rem; animation: hb 1.2s ease-in-out infinite; }
+  @keyframes hb {
+    0%,100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.18); }
+    60% { transform: scale(1); }
+  }
+
+  .ss h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #4a2525;
+  }
+
+  .ss p {
+    font-size: 1.05rem;
+    color: #7a4a4a;
+    font-style: italic;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .ss p strong { color: #d45060; font-weight: 500; font-style: normal; }
+
+  @media(max-width:420px){
+    .intro .n { font-size: 1.9rem; }
+    .mc h1 { font-size: 1.75rem; }
+    .ss h1 { font-size: 2rem; }
+    .mc .pm { font-size: .88rem; }
+    .mc { padding: 1.8rem 1.4rem; }
+    .ss { padding: 2rem 1.4rem; }
+    .by { padding: .85rem 2.2rem; font-size: 1rem; }
+    .bn { padding: .75rem 1.6rem; font-size: .88rem; }
+    .mc .cn { font-size: 1.3rem; }
+    .ss .se { font-size: 3.5rem; }
+    .ss p { font-size: .95rem; }
+  }
+  @media(max-width:350px){
+    .mc h1 { font-size: 1.55rem; }
+    .mc .pm { font-size: .82rem; }
+    .mc { padding: 1.5rem 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="c"></canvas>
+
+<div class="ov">
+  <div class="intro" id="I">
+    <div class="f">Para</div>
+    <div class="n">Adriana Molina</div>
+    <div class="l">Tengo algo que preguntarte</div>
+    <button onclick="go()">Abrir 💌</button>
+  </div>
+
+  <div class="mc" id="M">
+    <div class="ct">Para</div>
+    <div class="cn">Adriana 💕</div>
+    <h1>¿Quieres pasar este <em>San Valentín</em> conmigo?</h1>
+    <div class="dv"></div>
+    <p class="pm">
+      Sé que es solo uno más de los 365 días del año,
+      pero es un día que quiero pasar <strong>contigo</strong>.<br><br>
+      Porque tú haces que esos 365 días sean especiales,
+      que cada uno tenga algo que recordar.<br><br>
+      Contigo lo paso mejor cada segundo,
+      cada minuto, cada momento.<br><br>
+      Y este 14 de febrero quiero que sea <strong>nuestro</strong>.
+    </p>
+    <div class="ba" id="B">
+      <button class="by" id="Y" onclick="yes()">Sí, quiero 💕</button>
+      <button class="bn" id="N">No</button>
+    </div>
+  </div>
+
+  <div class="ss" id="S">
+    <div class="se">🥰</div>
+    <h1>¡Lo sabía, mi amor!</h1>
+    <p>
+      Ya me hiciste la persona más feliz.<br><br>
+      Nos vemos el <strong>14 de febrero</strong>,<br>
+      y te prometo que va a ser un día
+      que los dos vamos a recordar. 💗
+    </p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+let sc,ca,re,cl,hP,dP,sP,mx=0,my=0,tx=0,ty=0;
+const mb='ontouchstart'in window||navigator.maxTouchPoints>0;
+
+function init(){
+  sc=new THREE.Scene();
+  ca=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
+  ca.position.z=mb?6:5;
+  re=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:!mb,alpha:true});
+  re.setSize(innerWidth,innerHeight);
+  re.setPixelRatio(Math.min(devicePixelRatio,2));
+  re.setClearColor(0xfff5f0,1);
+  cl=new THREE.Clock();
+  bH();bD();bS();
+  addEventListener('resize',()=>{ca.aspect=innerWidth/innerHeight;ca.updateProjectionMatrix();re.setSize(innerWidth,innerHeight)});
+  addEventListener('mousemove',e=>{tx=(e.clientX/innerWidth)*2-1;ty=-(e.clientY/innerHeight)*2+1});
+  if(mb&&window.DeviceOrientationEvent)addEventListener('deviceorientation',e=>{if(e.gamma!==null){tx=Math.max(-1,Math.min(1,e.gamma/30));ty=Math.max(-1,Math.min(1,(e.beta-45)/-30))}});
+  addEventListener('touchmove',e=>{if(e.touches[0]){tx=(e.touches[0].clientX/innerWidth)*2-1;ty=-(e.touches[0].clientY/innerHeight)*2+1}},{passive:true});
+  tk();
+}
+
+function bH(){
+  const N=mb?2000:3000,pos=new Float32Array(N*3),col=new Float32Array(N*3),sz=new Float32Array(N);
+  const pl=[[1,.54,.5],[.94,.4,.58],[1,.62,.48],[.96,.48,.48],[1,.72,.66],[.96,.56,.66],[1,.5,.44]];
+  for(let i=0;i<N;i++){
+    const t=(i/N)*Math.PI*2,s=.068;
+    let x=16*Math.pow(Math.sin(t),3)*s,y=(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*s,z=(Math.random()-.5)*.3;
+    x+=(Math.random()-.5)*.1;y+=(Math.random()-.5)*.1;
+    pos[i*3]=x;pos[i*3+1]=y+.3;pos[i*3+2]=z;
+    const c=pl[~~(Math.random()*pl.length)];
+    col[i*3]=c[0]+(Math.random()-.5)*.05;col[i*3+1]=c[1]+(Math.random()-.5)*.05;col[i*3+2]=c[2]+(Math.random()-.5)*.05;
+    sz[i]=1.5+Math.random()*3.5;
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  g.setAttribute('color',new THREE.BufferAttribute(col,3));
+  g.setAttribute('size',new THREE.BufferAttribute(sz,1));
+  const m=new THREE.ShaderMaterial({
+    uniforms:{uTime:{value:0},uMouse:{value:new THREE.Vector2()},uActive:{value:0},uPR:{value:Math.min(devicePixelRatio,2)}},
+    vertexShader:`uniform float uTime,uActive,uPR;uniform vec2 uMouse;attribute float size;attribute vec3 color;varying vec3 vC;varying float vA;
+    void main(){vC=color;vec3 p=position;float b=sin(uTime)*0.045+1.0;p*=b;p.z+=sin(uTime*2.5+p.x*4.0+p.y*3.0)*0.018*uActive;
+    float md=length(p.xy-uMouse*2.5);float mi=smoothstep(1.8,0.0,md)*0.2*uActive;vec2 d=normalize(p.xy-uMouse*2.5+0.001);p.xy+=d*mi;
+    p.y+=sin(uTime*0.6+float(gl_VertexID)*0.008)*0.012;vec4 mv=modelViewMatrix*vec4(p,1.0);gl_Position=projectionMatrix*mv;
+    gl_PointSize=size*(8.0/-mv.z)*uPR;vA=smoothstep(0.0,0.5,uActive)*(0.5+0.35*sin(uTime*1.2+float(gl_VertexID)*0.25));}`,
+    fragmentShader:`varying vec3 vC;varying float vA;void main(){float d=length(gl_PointCoord-0.5)*2.0;float a=smoothstep(1.0,0.1,d)*(0.4+vA*0.5);gl_FragColor=vec4(vC,a);}`,
+    transparent:true,depthWrite:false,blending:THREE.NormalBlending
+  });
+  hP=new THREE.Points(g,m);hP.position.y=-.3;sc.add(hP);
+}
+
+function bD(){
+  const N=mb?250:400,pos=new Float32Array(N*3),sz=new Float32Array(N);
+  for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*18;pos[i*3+1]=(Math.random()-.5)*14;pos[i*3+2]=(Math.random()-.5)*8-3;sz[i]=Math.random()*3;}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('size',new THREE.BufferAttribute(sz,1));
+  const m=new THREE.ShaderMaterial({
+    uniforms:{uTime:{value:0},uPR:{value:Math.min(devicePixelRatio,2)}},
+    vertexShader:`uniform float uTime,uPR;attribute float size;varying float vA;varying vec3 vP;void main(){vec3 p=position;vP=p;p.y+=sin(uTime*.25+p.x*.5)*.5;p.x+=cos(uTime*.18+p.z*.3)*.4;vec4 mv=modelViewMatrix*vec4(p,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size*(5.0/-mv.z)*uPR;vA=.18+.12*sin(uTime*.5+p.y*1.5);}`,
+    fragmentShader:`varying float vA;varying vec3 vP;void main(){float d=length(gl_PointCoord-.5)*2.0;vec3 c=mix(vec3(1.,.7,.65),vec3(.95,.55,.7),sin(vP.x*.3)*.5+.5);gl_FragColor=vec4(c,smoothstep(1.,0.,d)*vA);}`,
+    transparent:true,depthWrite:false
+  });
+  dP=new THREE.Points(g,m);sc.add(dP);
+}
+
+function bS(){
+  const N=mb?50:80,pos=new Float32Array(N*3),sz=new Float32Array(N);
+  for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*12;pos[i*3+1]=(Math.random()-.5)*10;pos[i*3+2]=(Math.random()-.5)*6-1;sz[i]=1+Math.random()*2;}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('size',new THREE.BufferAttribute(sz,1));
+  const m=new THREE.ShaderMaterial({
+    uniforms:{uTime:{value:0},uPR:{value:Math.min(devicePixelRatio,2)}},
+    vertexShader:`uniform float uTime,uPR;attribute float size;varying float vA;void main(){vec3 p=position;p.y+=sin(uTime*.4+p.x*2.)*.3;vec4 mv=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*mv;gl_PointSize=size*(4./-mv.z)*uPR;vA=pow(sin(uTime*3.+float(gl_VertexID)*1.7)*.5+.5,3.);}`,
+    fragmentShader:`varying float vA;void main(){float d=length(gl_PointCoord-.5)*2.;float a=exp(-d*3.)*vA*.7;gl_FragColor=vec4(1.,.85,.75,a);}`,
+    transparent:true,depthWrite:false,blending:THREE.AdditiveBlending
+  });
+  sP=new THREE.Points(g,m);sc.add(sP);
+}
+
+function tk(){
+  requestAnimationFrame(tk);const t=cl.getElapsedTime();
+  mx+=(tx-mx)*.04;my+=(ty-my)*.04;
+  hP.material.uniforms.uTime.value=t;hP.material.uniforms.uMouse.value.set(mx,my);
+  hP.rotation.y=mx*.2;hP.rotation.x=-my*.1;
+  dP.material.uniforms.uTime.value=t;dP.rotation.y=t*.012;
+  sP.material.uniforms.uTime.value=t;
+  ca.position.x=Math.sin(t*.12)*.06;ca.position.y=Math.cos(t*.08)*.04;
+  re.render(sc,ca);
+}
+
+function go(){
+  document.getElementById('I').classList.add('h');
+  document.getElementById('M').classList.add('a');
+  const s=Date.now();
+  (function ac(){const p=Math.min((Date.now()-s)/2000,1);hP.material.uniforms.uActive.value=1-Math.pow(1-p,3);if(p<1)requestAnimationFrame(ac)})();
+}
+
+const ph=["¿Segura, mi amor? 🥺","Piénsalo otra vez...","Mmm no te creo 😏","¿Me vas a hacer esto? 🥲","Jaja esa opción no existe 😤","Error 404: 'No' no encontrado","Buen intento pero no 😌","Solo hay una respuesta correcta...","Te lo pido bonito 🥹","¡Ya dile que sí, mi amor! 💕"];
+let nc=0;
+const bN=document.getElementById('N'),bY=document.getElementById('Y'),ar=document.getElementById('B');
+
+bN.addEventListener('click',hN);
+if(mb)bN.addEventListener('touchend',e=>{e.preventDefault();hN(e)});
+bN.addEventListener('mouseenter',()=>{if(nc>=2)fl()});
+
+function hN(e){
+  if(e)e.preventDefault();nc++;
+  const m=document.createElement('div');m.className='fm';
+  m.textContent=ph[Math.min(nc-1,ph.length-1)];
+  const r=bN.getBoundingClientRect();
+  m.style.left=r.left+r.width/2+'px';m.style.top=r.top-8+'px';
+  document.body.appendChild(m);setTimeout(()=>m.remove(),2200);
+  const s=Math.min(1+nc*.12,1.65);
+  bY.style.transform=`scale(${s})`;
+  bY.style.boxShadow=`0 ${6+nc*2}px ${25+nc*5}px rgba(240,98,146,${.3+nc*.04})`;
+  bN.style.fontSize=`${Math.max(.95-nc*.06,.5)}rem`;
+  bN.style.padding=`${Math.max(.85-nc*.06,.3)}rem ${Math.max(2-nc*.18,.7)}rem`;
+  bN.style.opacity=Math.max(1-nc*.1,.2);
+  if(nc>=2)fl();
+  hP.rotation.z=(Math.random()-.5)*.1;setTimeout(()=>{hP.rotation.z=0},350);
+}
+
+function fl(){
+  const a=ar.getBoundingClientRect(),mX=Math.min(a.width*.4,120);
+  const rx=(Math.random()-.5)*mX*2,ry=(Math.random()-.5)*120;
+  bN.style.transform=`translate(${rx}px,${ry}px) scale(${Math.max(1-nc*.06,.35)})`;
+}
+
+function yes(){
+  document.getElementById('M').className='mc h';
+  document.getElementById('S').classList.add('a');
+  ex();cf();
+  if(navigator.vibrate)navigator.vibrate([100,50,100]);
+}
+
+function ex(){
+  const p=hP.geometry.attributes.position.array,o=p.slice(),N=p.length/3,t0=Date.now();
+  (function a(){
+    const pr=(Date.now()-t0)/2000;
+    if(pr<.4){const e=(pr/.4)*(pr/.4);for(let i=0;i<N;i++){const ox=o[i*3],oy=o[i*3+1],oz=o[i*3+2],d=Math.sqrt(ox*ox+oy*oy+oz*oz)+.01;p[i*3]=ox+(ox/d)*e*2.5;p[i*3+1]=oy+(oy/d)*e*2.5;p[i*3+2]=oz+(oz/d)*e*3;}}
+    else{const e=1-Math.pow(1-((pr-.4)/.6),3);for(let i=0;i<N;i++){const ox=o[i*3],oy=o[i*3+1],oz=o[i*3+2],d=Math.sqrt(ox*ox+oy*oy+oz*oz)+.01;const X=ox+(ox/d)*2.5,Y=oy+(oy/d)*2.5,Z=oz+(oz/d)*3;p[i*3]=X+(ox-X)*e;p[i*3+1]=Y+(oy-Y)*e;p[i*3+2]=Z+(oz-Z)*e;}}
+    hP.geometry.attributes.position.needsUpdate=true;if(pr<1)requestAnimationFrame(a);
+  })();
+}
+
+function cf(){
+  const cs=['#ff8a80','#f48fb1','#ffab91','#f06292','#ffccbc','#e57373','#ffd4d4','#ce93d8','#ffb74d','#fff176'];
+  if(!document.getElementById('cfs')){const s=document.createElement('style');s.id='cfs';s.textContent='@keyframes cfd{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}';document.head.appendChild(s);}
+  for(let i=0;i<(mb?90:140);i++){
+    const el=document.createElement('div'),w=5+Math.random()*10;
+    el.style.cssText=`position:fixed;width:${w}px;height:${w}px;background:${cs[~~(Math.random()*cs.length)]};border-radius:${Math.random()>.5?'50%':'2px'};left:${Math.random()*100}%;top:-12px;z-index:200;pointer-events:none;animation:cfd ${2+Math.random()*2.5}s ${Math.random()*.8}s ease-out forwards;`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),6000);
+  }
+}
+
+init();
+</script>
+</body>
+</html>
